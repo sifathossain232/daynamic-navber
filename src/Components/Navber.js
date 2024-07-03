@@ -10,7 +10,7 @@ const Navber = () => {
     const [hoverTwo, setHoverTwo] = useState(null)
 
     const [tick, setTick] = useState(false)
-    console.log(tick)
+    // console.log(tick)
 
 
     return (
@@ -24,7 +24,7 @@ const Navber = () => {
                                 onMouseEnter={() => setHover(index)}
                                 onMouseLeave={() => setHover(null)}
                                 key={index}
-                                className="group relative leading-10"
+                                className="group relative leading-9"
                             >
                                 <div className="text-white font-medium flex items-center gap-1 cursor-pointer ">
                                     <span>{item.title}</span>
@@ -35,47 +35,49 @@ const Navber = () => {
                                     )}
                                 </div>
                                 {hover === index && item.menus && (
-                                    <ul className="absolute bg-extraDarkBlue rounded-b-[4px] top-[44px] right-0 ">
-                                        <div className={`size-5 rotate-45 absolute right-5 -top-3 ${tick ? "bg-blue-500" : "bg-extraDarkBlue"}`}></div>
-                                        {
-                                            item.menus?.map((menu, i) => (
-                                                <li
-                                                    onMouseEnter={() => { setHoverTwo(i)
-                                                        if (i === 0) {
-                                                            setTick(true)
-                                                        }
-                                                    }}
+                                    <>
+                                    <div className={`size-5 rotate-45 absolute right-5 top-[35px] ${tick ? "bg-blue-500" : "bg-extraDarkBlue"}  z-[1]`}></div>
+                                        <ul className="absolute bg-extraDarkBlue rounded-b-[4px] top-[44px] right-0 z-[9999]">
+                                            {
+                                                item.menus?.map((menu, i) => (
+                                                    <li
+                                                        onMouseEnter={() => { setHoverTwo(i)
+                                                            if (i === 0) {
+                                                                setTick(true)
+                                                            }
+                                                        }}
 
-                                                    onMouseLeave={() => {
-                                                        setHoverTwo(null)
-                                                        if (i === 0) {
-                                                            setTick(false)
+                                                        onMouseLeave={() => {
+                                                            setHoverTwo(null)
+                                                            if (i === 0) {
+                                                                setTick(false)
+                                                            }
                                                         }
-                                                    }
 
-                                                    }
-                                                    key={i}
-                                                    className="px-5 w-[200px] py-1.5 hover:bg-blue-500 relative border-b last:border-b-0 border-blue-500/80 "
-                                                >
-                                                    <span className=" text-[14px] font-medium text-[#D1D1D1] cursor-pointer">{menu.title}</span>
-                                                    {
-                                                        hoverTwo === i && menu.submenu && (
-                                                            <ul className="absolute left-[100%] top-0 px-5 bg-extraDarkBlue w-[200px] cursor-pointer">
-                                                                {
-                                                                    menu?.submenu?.map((sub, e) => (
-                                                                        <li className="text-white py-1.5" key={e}
-                                                                        >
-                                                                            <span>{sub.title}</span>
-                                                                        </li>
-                                                                    ))
-                                                                }
-                                                            </ul>
-                                                        )
-                                                    }
-                                                </li>
-                                            ))
-                                        }
-                                    </ul>
+                                                        }
+                                                        key={i}
+                                                        className="px-5 min-w-full w-[200px] h-[43px] py-1.5 hover:bg-blue-500 relative border-b last:border-b-0 border-blue-500/80"
+                                                    >
+                                                        <span className=" text-[14px] font-medium text-[#D1D1D1] cursor-pointer">{menu.title}</span>
+                                                        {
+                                                            hoverTwo === i && menu.submenu && (
+                                                                <ul className="absolute left-[100%] top-0 px-5 bg-extraDarkBlue w-[200px] cursor-pointer">
+                                                                    {
+                                                                        menu?.submenu?.map((sub, e) => (
+                                                                            <li className="text-white py-1.5" key={e}
+                                                                            >
+                                                                                <span>{sub.title}</span>
+                                                                            </li>
+                                                                        ))
+                                                                    }
+                                                                </ul>
+                                                            )
+                                                        }
+                                                    </li>
+                                                ))
+                                            }
+                                        </ul>
+                                    </>
                                 )}
 
                             </li>
